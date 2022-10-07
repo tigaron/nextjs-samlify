@@ -18,6 +18,8 @@
 # misc
 .DS_Store
 *.pem
+*.cer
+*.p12
 
 # debug
 npm-debug.log*

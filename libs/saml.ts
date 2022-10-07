@@ -10,7 +10,11 @@ export const idp = samlify.IdentityProvider({
 export const sp = samlify.ServiceProvider({
 	entityID: process.env.SP_IDENTITY,
 	authnRequestsSigned: true,
+	wantMessageSigned: true,
+	wantLogoutResponseSigned: true,
 	wantLogoutRequestSigned: true,
+	wantAssertionsSigned: true,
+	signingCert: Buffer.from(process.env.SIGN_B64_CERTIFICATE as string, 'base64'),
 	privateKey: Buffer.from(process.env.SIGN_B64_PRIVATE_KEY as string, 'base64'),
 	privateKeyPass: process.env.SP_PRIVATE_KEY_PASS,
 	assertionConsumerService: [
