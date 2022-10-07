@@ -19,7 +19,9 @@ export default function Home() {
 					</h1>
 
 					<p className={styles.description}>
-						Get started by editing <code className={styles.code}>pages/index.tsx</code>
+						Try logging in to test the functionality.
+						<br />
+						<code className={styles.code}>user1:password</code> or <code className={styles.code}>admin:password</code>
 					</p>
 
 					<div className={styles.grid}>

@@ -25,9 +25,8 @@ export default function Header() {
 					)}
 					{user?.isLoggedIn === false && (
 						<li>
-							<Link href="/api/login">
-								<a>Login</a>
-							</Link>
+							{/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+							<a onClick={() => router.push('/api/login')}>Login</a>
 						</li>
 					)}
 					{user?.isLoggedIn === true && (
@@ -43,9 +42,8 @@ export default function Header() {
 								</Link>
 							</li>
 							<li>
-								<Link href="/api/logout">
-									<a>Logout</a>
-								</Link>
+								{/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+								<a onClick={() => router.push('/api/logout')}>Logout</a>
 							</li>
 						</>
 					)}
@@ -75,6 +73,7 @@ export default function Header() {
 					text-decoration: none;
 					display: flex;
 					align-items: center;
+					cursor: pointer;
 				}
 				a img {
 					margin-right: 1em;
