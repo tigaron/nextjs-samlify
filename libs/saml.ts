@@ -23,10 +23,4 @@ export const sp = samlify.ServiceProvider({
 			Location: process.env.SSO_CALLBACK_URL as string,
 		},
 	],
-	singleLogoutService: [
-		{
-			Binding: samlify.Constants.namespace.binding.post,
-			Location: process.env.SLO_CALLBACK_URL as string,
-		},
-	],
 });
