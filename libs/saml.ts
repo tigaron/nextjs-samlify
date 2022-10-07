@@ -9,7 +9,7 @@ export const idp = samlify.IdentityProvider({
 });
 
 export const sp = samlify.ServiceProvider({
-	entityID: 'next-auth-saml',
+	entityID: process.env.SP_IDENTITY,
 	authnRequestsSigned: true,
 	wantLogoutRequestSigned: true,
 	privateKey: readFileSync('./certs/private.key'),
