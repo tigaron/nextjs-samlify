@@ -2,13 +2,10 @@ import { readFileSync } from 'fs';
 import * as samlify from 'samlify';
 import * as validator from '@authenio/samlify-node-xmllint';
 
-const response = await fetch(process.env.IDP_METADATA as string);
-const body = await response.text();
-
 samlify.setSchemaValidator(validator);
 
 export const idp = samlify.IdentityProvider({
-	metadata: body,
+	metadata: readFileSync('./certs/idp.xml'),
 });
 
 export const sp = samlify.ServiceProvider({
