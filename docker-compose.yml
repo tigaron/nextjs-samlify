@@ -1,0 +1,19 @@
+version: '3'
+services:
+  nextjs:
+    image: node:16
+    expose:
+      - 3000
+    volumes:
+      - ./:/app/
+    command: bash -c "cd /app && npm run build && npm run start"
+  nginx:
+    image: nginx
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/certificate.pem:/etc/ssl/certificate.pem
+      - ./nginx/privatekey.pem:/etc/ssl/privatekey.pem
+      - ./nginx/global.pass:/etc/ssl/global.pass

@@ -20,6 +20,7 @@
 *.pem
 *.cer
 *.pfx
+*.pass
 
 # debug
 npm-debug.log*
