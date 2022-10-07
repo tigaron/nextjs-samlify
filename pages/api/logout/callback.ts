@@ -6,5 +6,6 @@ export default withIronSessionApiRoute(logoutCallbackRoute, sessionOptions);
 
 async function logoutCallbackRoute(req: NextApiRequest, res: NextApiResponse) {
 	req.session.destroy();
-	res.status(307).redirect('/');
+	res.writeHead(302, { location: '/' });
+	res.end();
 }

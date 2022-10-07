@@ -1,18 +1,17 @@
-import { readFileSync } from 'fs';
 import * as samlify from 'samlify';
 import * as validator from '@authenio/samlify-node-xmllint';
 
 samlify.setSchemaValidator(validator);
 
 export const idp = samlify.IdentityProvider({
-	metadata: readFileSync('./certs/idp.xml'),
+	metadata: Buffer.from(process.env.IDP_METADATA as string, 'base64'),
 });
 
 export const sp = samlify.ServiceProvider({
 	entityID: process.env.SP_IDENTITY,
 	authnRequestsSigned: true,
 	wantLogoutRequestSigned: true,
-	privateKey: readFileSync('./certs/private.key'),
+	privateKey: Buffer.from(process.env.SIGN_B64_PRIVATE_KEY as string, 'base64'),
 	privateKeyPass: process.env.SP_PRIVATE_KEY_PASS,
 	assertionConsumerService: [
 		{

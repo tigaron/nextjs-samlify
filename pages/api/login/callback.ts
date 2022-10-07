@@ -14,8 +14,8 @@ async function loginCallbackRoute(req: NextApiRequest, res: NextApiResponse) {
 		const user = { isLoggedIn: true, login: extract.attributes.email, sessionInfo: extract } as User;
 		req.session.user = user;
 		await req.session.save();
-
-		res.status(307).redirect('/profile-sg');
+		res.writeHead(302, { location: '/profile-sg' });
+		res.end();
 	} catch (error) {
 		console.log(error);
 		res.status(500).json({ message: (error as Error).message });
