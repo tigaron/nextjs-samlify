@@ -11,7 +11,7 @@ async function loginCallbackRoute(req: NextApiRequest, res: NextApiResponse) {
 		const { extract } = await sp.parseLoginResponse(idp, 'post', req);
 		console.log(`user session data from saml:`, JSON.stringify(extract, null, 2));
 
-		const user = { isLoggedIn: true, login: extract.nameID, sessionInfo: extract } as User;
+		const user = { isLoggedIn: true, login: extract.attributes.email, sessionInfo: extract } as User;
 		req.session.user = user;
 		await req.session.save();
 		res.writeHead(302, { location: '/profile-sg' });

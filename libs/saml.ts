@@ -5,22 +5,16 @@ samlify.setSchemaValidator(validator);
 
 export const idp = samlify.IdentityProvider({
 	metadata: Buffer.from(process.env.IDP_METADATA as string, 'base64'),
-});
-
-export const sp = samlify.ServiceProvider({
-	entityID: process.env.SP_IDENTITY,
-	authnRequestsSigned: true,
-	wantMessageSigned: true,
-	wantLogoutResponseSigned: true,
+	wantAuthnRequestsSigned: true,
 	wantLogoutRequestSigned: true,
-	wantAssertionsSigned: true,
+	wantLogoutResponseSigned: true,
 	signingCert: Buffer.from(process.env.SIGN_B64_CERTIFICATE as string, 'base64'),
 	privateKey: Buffer.from(process.env.SIGN_B64_PRIVATE_KEY as string, 'base64'),
 	privateKeyPass: process.env.SP_PRIVATE_KEY_PASS,
-	assertionConsumerService: [
-		{
-			Binding: samlify.Constants.namespace.binding.post,
-			Location: process.env.SSO_CALLBACK_URL as string,
-		},
-	],
+});
+
+export const sp = samlify.ServiceProvider({
+	metadata: Buffer.from(process.env.SP_METADATA as string, 'base64'),
+	privateKey: Buffer.from(process.env.SIGNING_KEY as string, 'base64'),
+	encPrivateKey: Buffer.from(process.env.ENCRYPTION_KEY as string, 'base64'),
 });
